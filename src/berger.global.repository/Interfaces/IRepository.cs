@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace berger.global.repository.Interfaces
+namespace Berger.Global.Repository.Interfaces
 {
     public interface IRepository<T>
     {

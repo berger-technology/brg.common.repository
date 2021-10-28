@@ -5,7 +5,7 @@
     <PackageId>brg.global.repository</PackageId>
     <Product>brg.global.repository</Product>
     <Company>Berger Information Technology</Company>
-    <Description>Our common repository library</Description>
+    <Description></Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using berger.global.repository.Extensions;
@@ -21,93 +20,67 @@ namespace berger.global.repository.Services
         }
         #endregion
 
-        #region Sync Methods
-        public T Add(T entity)
+        #region Methods
+        public IQueryable<T> Get()
         {
-            _context.Set<T>().Add(entity);
+            return _context.Set<T>();
+        }
+        public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
+        {
+            return Get().Where(predicate);
+        }
+        public T GetByID(Guid id)
+        {
+            return _context.Set<T>().Find(id);
+        }
+        public T Add(T element)
+        {
+            _context.Set<T>().Add(element);
             _context.SaveChanges();
 
-            return entity;
+            return element;
         }
-
-        public void Add(IQueryable<T> entities)
+        public void Add(IQueryable<T> elements)
         {
-            foreach (var entity in entities)
+            try
             {
-                _context.Set<T>().Add(entity);
+                foreach (var entity in elements)
+                {
+                    _context.Set<T>().Add(entity);
+                }
+
+                _context.SaveChanges();
             }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void Update(T element)
+        {
+            _context.Set<T>().Update(element);
 
             _context.SaveChanges();
-
         }
+        public void Update(Guid id, T element)
+        {
+            _context.Set<T>().Update(element);
+            _context.SaveChanges();
+        }
+
         public void Delete(Guid id)
         {
             var element = _context.Set<T>().Find(id);
 
             _context.Set<T>();
             _context.SoftDelete<T>(element);
+
             _context.SaveChanges();
         }
-        public IQueryable<T> Get()
-        {
-            return _context.Set<T>();
-        }
-        public T GetByID(Guid id)
-        {
-            return _context.Set<T>().Find(id);
-        }
-        public T Get(string key)
-        {
-            return _context.Set<T>().Find(key);
-        }
-        public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
-        {
-            return Get().Where(predicate);
-        }
-        public void Update(Guid id, T entity)
-        {
-            _context.Set<T>().Update(entity);
-            _context.SaveChanges();
-        }
-        public int Count()
-        {
-            return Get().Count();
-        }
+
         public void Dispose()
         {
             _context.Dispose();
-        }
-        #endregion
-
-        #region Async Methods
-        public async Task<T> AddAsync(T element)
-        {
-            await _context.Set<T>().AddAsync(element);
-            await _context.SaveChangesAsync();
-
-            return element;
-        }
-
-        public async Task UpdateAsync(T element)
-        {
-            _context.Set<T>().Update(element);
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(Guid id)
-        {
-            var element = _context.Set<T>().Find(id);
-
-            _context.Set<T>();
-            _context.SoftDelete<T>(element);
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<T> GetByIdAsync(Guid id)
-        {
-            return await _context.Set<T>().FindAsync(id);
         }
         #endregion
     }

@@ -29,7 +29,8 @@ namespace berger.global.repository.Extensions
             if (string.IsNullOrEmpty(connection))
                 throw new FileNotFoundException($"The configuration file for the connection {name} was not found.");
 
-            services.AddDbContext<T>(options =>
+            services.AddDbContext<T>(
+            options =>
             {
                 options.UseSqlServer(connection);
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);

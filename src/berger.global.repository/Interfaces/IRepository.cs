@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace brg.global.repository.Interfaces
+namespace berger.global.repository.Interfaces
 {
     public interface IRepository<T>
     {

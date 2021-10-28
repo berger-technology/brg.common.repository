@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace brg.global.repository.Extensions
+namespace berger.global.repository.Extensions
 {
     public static class DataExtensions
     {

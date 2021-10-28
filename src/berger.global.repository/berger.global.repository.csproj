@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <PackageId>brg.global.repository</PackageId>
-    <Product>brg.global.repository</Product>
+    <PackageId>berger.global.repository</PackageId>
+    <Product>berger.global.repository</Product>
     <Company>Berger Information Technology</Company>
     <Description></Description>
   </PropertyGroup>

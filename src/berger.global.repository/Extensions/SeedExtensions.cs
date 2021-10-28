@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-namespace brg.global.repository.Extensions
+namespace berger.global.repository.Extensions
 {
     public static class SeedExtensions
     {

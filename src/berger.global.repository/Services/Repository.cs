@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using berger.global.repository.Extensions;
-using berger.global.repository.Interfaces;
+using Berger.Global.Repository.Extensions;
+using Berger.Global.Repository.Interfaces;
 
-namespace berger.global.repository.Services
+namespace Berger.Global.Repository.Services
 {
     public abstract class Repository<T> : IDisposable, IRepository<T> where T : class
     {

@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <PackageId>berger.global.repository</PackageId>
-    <Product>berger.global.repository</Product>
+    <PackageId>Berger.Global.Repository</PackageId>
+    <Product>Berger.Global.Repository</Product>
     <Company>Berger Information Technology</Company>
     <Description></Description>
+    <AssemblyName>Berger.Global.Repository</AssemblyName>
+    <RootNamespace>Berger.Global.Repository</RootNamespace>
+    <Authors>Berger.Global.Repository</Authors>
   </PropertyGroup>
 
   <ItemGroup>

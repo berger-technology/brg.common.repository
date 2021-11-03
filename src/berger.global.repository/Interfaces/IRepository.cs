@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Berger.Global.Repository.Interfaces
 {
@@ -14,5 +15,8 @@ namespace Berger.Global.Repository.Interfaces
         void Update(T element);
         void Update(Guid id, T element);
         void Delete(Guid id);
+        Task<T> AddAsync(T element);
+        Task UpdateAsync(T element);
+        Task DeleteAsync(Guid id);
     }
 }

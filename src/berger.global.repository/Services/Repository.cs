@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Berger.Global.Repository.Extensions;
@@ -78,6 +79,31 @@ namespace Berger.Global.Repository.Services
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        public async Task<T> AddAsync(T element)
+        {
+            await _context.Set<T>().AddAsync(element);
+            await _context.SaveChangesAsync();
+
+            return element;
+        }
+
+        public async Task UpdateAsync(T element)
+        {
+            _context.Set<T>().Update(element);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var element = _context.Set<T>().Find(id);
+
+            _context.Set<T>();
+            _context.SoftDelete<T>(element);
+
+            await _context.SaveChangesAsync();
         }
         #endregion
     }

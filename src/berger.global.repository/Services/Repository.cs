@@ -45,9 +45,7 @@ namespace Berger.Global.Repository.Services
             try
             {
                 foreach (var entity in elements)
-                {
                     _context.Set<T>().Add(entity);
-                }
 
                 _context.SaveChanges();
             }
@@ -59,7 +57,6 @@ namespace Berger.Global.Repository.Services
         public void Update(T element)
         {
             _context.Set<T>().Update(element);
-
             _context.SaveChanges();
         }
         public void Update(Guid id, T element)

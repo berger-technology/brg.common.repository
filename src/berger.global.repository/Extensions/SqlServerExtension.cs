@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Berger.Global.Repository.Extensions
 {
-    public static class SqlServerExtensions
+    public static class SqlServerExtension
     {
         public static void ConfigureSql<T>(this IServiceCollection services, IConfiguration configuration, string name) where T : DbContext
         {

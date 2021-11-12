@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Berger.Global.Repository.Extensions
 {
-    public static class SeedExtensions
+    public static class SeedExtension
     {
         public static void SeedFromFile(this DbContext context, string path)
         {

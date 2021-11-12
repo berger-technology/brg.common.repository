@@ -2,7 +2,7 @@
 
 namespace Berger.Global.Repository.Extensions
 {
-    public static class DataExtensions
+    public static class DataExtension
     {
         public static void SoftDelete<T>(this DbContext context, T entity) where T : class
         {

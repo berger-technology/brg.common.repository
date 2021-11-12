@@ -65,7 +65,6 @@ namespace Berger.Global.Repository.Services
             _context.Set<T>().Update(element);
             _context.SaveChanges();
         }
-
         public void Delete(Guid id)
         {
             var element = _context.Set<T>().Find(id);
@@ -75,12 +74,6 @@ namespace Berger.Global.Repository.Services
 
             _context.SaveChanges();
         }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
-
         public async Task<T> AddAsync(T element)
         {
             await _context.Set<T>().AddAsync(element);
@@ -88,14 +81,12 @@ namespace Berger.Global.Repository.Services
 
             return element;
         }
-
         public async Task UpdateAsync(T element)
         {
             _context.Set<T>().Update(element);
 
             await _context.SaveChangesAsync();
         }
-
         public async Task DeleteAsync(Guid id)
         {
             var element = _context.Set<T>().Find(id);
@@ -104,6 +95,10 @@ namespace Berger.Global.Repository.Services
             _context.SoftDelete<T>(element);
 
             await _context.SaveChangesAsync();
+        }
+        public void Dispose()
+        {
+            _context.Dispose();
         }
         #endregion
     }

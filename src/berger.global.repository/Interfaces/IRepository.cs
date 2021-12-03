@@ -9,12 +9,12 @@ namespace Berger.Global.Repository.Interfaces
     public interface IRepository<T>
     {
         IQueryable<T> Get();
+        IQueryable<T> GetAsNoTracking();
         IQueryable<T> Get(Expression<Func<T, bool>> predicate);
         T GetByID(Guid id);
         T Add(T element);
         void Add(IQueryable<T> elements);
         void Update(T element);
-        void Update(T element, EntityState state);
         void Delete(Guid id);
         Task<T> AddAsync(T element);
         Task UpdateAsync(T element);

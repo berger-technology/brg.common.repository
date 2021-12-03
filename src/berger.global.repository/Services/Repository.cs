@@ -26,10 +26,16 @@ namespace Berger.Global.Repository.Services
         {
             return _context.Set<T>();
         }
+        public IQueryable<T> GetAsNoTracking()
+        {
+            return _context.Set<T>().AsNoTracking();
+        }
+
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
         {
             return Get().Where(predicate);
         }
+
         public T GetByID(Guid id)
         {
             return _context.Set<T>().Find(id);
@@ -57,12 +63,6 @@ namespace Berger.Global.Repository.Services
         }
         public void Update(T element)
         {
-            _context.Set<T>().Update(element);
-            _context.SaveChanges();
-        }
-        public void Update(T element, EntityState state)
-        {
-            _context.Entry(element).State = state;
             _context.Set<T>().Update(element);
             _context.SaveChanges();
         }

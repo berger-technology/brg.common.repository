@@ -60,8 +60,9 @@ namespace Berger.Global.Repository.Services
             _context.Set<T>().Update(element);
             _context.SaveChanges();
         }
-        public void Update(Guid id, T element)
+        public void Update(T element, EntityState state)
         {
+            _context.Entry(element).State = state;
             _context.Set<T>().Update(element);
             _context.SaveChanges();
         }

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Berger.Global.Repository.Extensions;
 using Berger.Global.Repository.Interfaces;
+using Berger.Global.Repository.Extensions;
 
 namespace Berger.Global.Repository.Services
 {
@@ -35,36 +35,37 @@ namespace Berger.Global.Repository.Services
         {
             return _context.Set<T>().Find(id);
         }
-        public T Add(T element)
+        public T Add(T element, bool detach = false)
         {
             _context.Set<T>().Add(element);
             _context.SaveChanges();
-            _context.Detach();
+
+            if (detach)
+                _context.Detach(element);
 
             return element;
         }
-        public void Add(IQueryable<T> elements)
+        public void Add(IQueryable<T> elements, bool detach = false)
         {
             foreach (var entity in elements)
                 _context.Set<T>().Add(entity);
 
+            if (detach)
+                _context.Detach();
+
             _context.SaveChanges();
-            _context.Detach();
         }
         public void Update(T element)
         {
-            _context.Set<T>().Update(element);
+            _context.Entry(element).State = EntityState.Modified;
             _context.SaveChanges();
-            _context.Detach();
         }
         public void Delete(Guid id)
         {
-            var element = _context.Set<T>().Find(id);
+            var element = GetByID(id);
 
-            _context.Set<T>();
             _context.SoftDelete<T>(element);
             _context.SaveChanges();
-            _context.Detach();
         }
         public async Task<T> AddAsync(T element)
         {
@@ -81,7 +82,7 @@ namespace Berger.Global.Repository.Services
         }
         public async Task DeleteAsync(Guid id)
         {
-            var element = _context.Set<T>().Find(id);
+            var element = GetByID(id);
 
             _context.Set<T>();
             _context.SoftDelete<T>(element);

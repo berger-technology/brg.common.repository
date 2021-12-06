@@ -26,11 +26,6 @@ namespace Berger.Global.Repository.Services
         {
             return _context.Set<T>();
         }
-        public IQueryable<T> GetAsNoTracking()
-        {
-            return _context.Set<T>().AsNoTracking();
-        }
-
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
         {
             return Get().Where(predicate);
@@ -44,27 +39,23 @@ namespace Berger.Global.Repository.Services
         {
             _context.Set<T>().Add(element);
             _context.SaveChanges();
+            _context.Detach();
 
             return element;
         }
         public void Add(IQueryable<T> elements)
         {
-            try
-            {
-                foreach (var entity in elements)
-                    _context.Set<T>().Add(entity);
+            foreach (var entity in elements)
+                _context.Set<T>().Add(entity);
 
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _context.SaveChanges();
+            _context.Detach();
         }
         public void Update(T element)
         {
             _context.Set<T>().Update(element);
             _context.SaveChanges();
+            _context.Detach();
         }
         public void Delete(Guid id)
         {
@@ -72,8 +63,8 @@ namespace Berger.Global.Repository.Services
 
             _context.Set<T>();
             _context.SoftDelete<T>(element);
-
             _context.SaveChanges();
+            _context.Detach();
         }
         public async Task<T> AddAsync(T element)
         {

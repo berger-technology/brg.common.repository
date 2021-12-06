@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Berger.Global.Repository.Extensions
 {
@@ -8,6 +9,17 @@ namespace Berger.Global.Repository.Extensions
         {
             context.Entry(entity).CurrentValues["Deleted"] = true;
             context.Entry(entity).Property("Deleted").IsModified = true;
+        }
+
+        public static void Detach(this DbContext context)
+        {
+            var entries = context.ChangeTracker
+                .Entries()
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
+                .ToList();
+
+                foreach (var entry in entries)
+                    entry.State = EntityState.Detached;
         }
     }
 }

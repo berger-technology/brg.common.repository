@@ -9,7 +9,6 @@ namespace Berger.Global.Repository.Interfaces
     public interface IRepository<T>
     {
         IQueryable<T> Get();
-        IQueryable<T> GetAsNoTracking();
         IQueryable<T> Get(Expression<Func<T, bool>> predicate);
         T GetByID(Guid id);
         T Add(T element);

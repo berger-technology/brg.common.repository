@@ -15,16 +15,16 @@ namespace Berger.Global.Repository.Extensions
             context.Entry(element).State = EntityState.Detached;
         }
 
-        public static void Detach(this DbContext context)
+        public static void Detach<T>(this DbContext context, IQueryable<T> elements)
         {
-            var entries = context.ChangeTracker
-                .Entries()
-                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
-                .ToList();
+            //var entries = context.ChangeTracker
+            //    .Entries()
+            //    .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
+            //    .ToList();
 
-            foreach (var entry in entries)
+            foreach (var element in elements)
             {
-                context.Entry(entry).State = EntityState.Detached;
+                context.Entry(element).State = EntityState.Detached;
             }
         }
     }

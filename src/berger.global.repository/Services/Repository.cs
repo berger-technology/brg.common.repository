@@ -50,10 +50,10 @@ namespace Berger.Global.Repository.Services
             foreach (var entity in elements)
                 _context.Set<T>().Add(entity);
 
-            if (detach)
-                _context.Detach();
-
             _context.SaveChanges();
+
+            if (detach)
+                _context.Detach(elements);
         }
         public void Update(T element)
         {

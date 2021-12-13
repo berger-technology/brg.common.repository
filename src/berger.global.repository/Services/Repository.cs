@@ -55,6 +55,15 @@ namespace Berger.Global.Repository.Services
             if (detach)
                 _context.Detach(elements);
         }
+
+        public void BulkInsert(IQueryable<T> elements)
+        {
+            _context.BulkInsert(elements);
+        }
+        public void BulkDelete(IQueryable<T> elements)
+        {
+            _context.BulkDelete(elements);
+        }
         public void Update(T element)
         {
             _context.Entry(element).State = EntityState.Modified;

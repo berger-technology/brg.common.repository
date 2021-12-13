@@ -17,11 +17,6 @@ namespace Berger.Global.Repository.Extensions
 
         public static void Detach<T>(this DbContext context, IQueryable<T> elements)
         {
-            //var entries = context.ChangeTracker
-            //    .Entries()
-            //    .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
-            //    .ToList();
-
             foreach (var element in elements)
             {
                 context.Entry(element).State = EntityState.Detached;

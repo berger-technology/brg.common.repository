@@ -30,7 +30,6 @@ namespace Berger.Global.Repository.Services
         {
             return Get().Where(predicate);
         }
-
         public T GetByID(Guid id)
         {
             return _context.Set<T>().Find(id);
@@ -55,7 +54,6 @@ namespace Berger.Global.Repository.Services
             if (detach)
                 _context.Detach(elements);
         }
-
         public void BulkInsert(IQueryable<T> elements)
         {
             _context.BulkInsert(elements);
@@ -68,6 +66,10 @@ namespace Berger.Global.Repository.Services
         {
             _context.Entry(element).State = EntityState.Modified;
             _context.SaveChanges();
+        }
+        public void BulkUpdate(IQueryable<T> elements)
+        {
+            _context.BulkUpdate(elements);
         }
         public void Delete(Guid id)
         {

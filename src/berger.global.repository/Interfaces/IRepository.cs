@@ -14,6 +14,7 @@ namespace Berger.Global.Repository.Interfaces
         void Add(IQueryable<T> elements, bool detach = false);
         void BulkInsert(IQueryable<T> elements);
         void Update(T element);
+        void BulkUpdate(IQueryable<T> elements);
         void Delete(Guid id);
         void BulkDelete(IQueryable<T> elements);
         Task<T> AddAsync(T element);

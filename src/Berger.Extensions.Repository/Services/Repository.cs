@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Berger.Global.Repository.Interfaces;
-using Berger.Global.Repository.Extensions;
+using Berger.Extensions.Repository.Auxiliar;
+using Berger.Extensions.Repository.Interfaces;
 
-namespace Berger.Global.Repository.Services
+namespace Berger.Extensions.Repository.Services
 {
     public abstract class Repository<T> : IDisposable, IRepository<T> where T : class
     {

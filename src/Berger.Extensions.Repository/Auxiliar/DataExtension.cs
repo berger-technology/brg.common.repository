@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Berger.Global.Repository.Extensions
+namespace Berger.Extensions.Repository.Auxiliar
 {
     public static class DataExtension
     {

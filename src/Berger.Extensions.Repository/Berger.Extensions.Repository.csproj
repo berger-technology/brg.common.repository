@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>Berger.Extensions.Repository</PackageId>
+    <Product>Berger.Extensions.Repository</Product>
+    <Company>Berger Information Technology</Company>
+    <Description></Description>
+    <AssemblyName>Berger.Extensions.Repository</AssemblyName>
+    <RootNamespace>Berger.Extensions.Repository</RootNamespace>
+    <Authors>Berger.Extensions.Repository</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="6.13.4" />
+  </ItemGroup>
+
+</Project>

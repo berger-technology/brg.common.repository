@@ -1,1 +1,1 @@
-# brg.common.repository
+# Berger.Extensions.Repository

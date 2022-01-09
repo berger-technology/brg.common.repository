@@ -26,6 +26,10 @@ namespace Berger.Extensions.Repository.Services
         {
             return _context.Set<T>();
         }
+        public IQueryable<T> IgnoreQueryFilters()
+        {
+            return _context.Set<T>().IgnoreQueryFilters();
+        }
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
         {
             return Get().Where(predicate);

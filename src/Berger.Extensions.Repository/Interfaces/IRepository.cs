@@ -8,6 +8,7 @@ namespace Berger.Extensions.Repository.Interfaces
     public interface IRepository<T>
     {
         IQueryable<T> Get();
+        IQueryable<T> IgnoreQueryFilters();
         IQueryable<T> Get(Expression<Func<T, bool>> predicate);
         T GetByID(Guid id);
         T Add(T element, bool detach = false);

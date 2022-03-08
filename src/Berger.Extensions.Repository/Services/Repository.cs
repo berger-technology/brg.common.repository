@@ -58,28 +58,23 @@ namespace Berger.Extensions.Repository.Services
             if (detach)
                 _context.Detach(elements);
         }
-        public void BulkInsert(IQueryable<T> elements)
-        {
-            _context.BulkInsert(elements);
-        }
-        public void BulkDelete(IQueryable<T> elements)
-        {
-            _context.BulkDelete(elements);
-        }
         public void Update(T element)
         {
             _context.Entry(element).State = EntityState.Modified;
             _context.SaveChanges();
-        }
-        public void BulkUpdate(IQueryable<T> elements)
-        {
-            _context.BulkUpdate(elements);
         }
         public void Delete(Guid id)
         {
             var element = GetByID(id);
 
             _context.SoftDelete<T>(element);
+            _context.SaveChanges();
+        }
+        public void Delete(IQueryable<T> elements)
+        {
+            foreach (var element in elements)
+                _context.SoftDelete<T>(element);
+
             _context.SaveChanges();
         }
         public async Task<T> AddAsync(T element)

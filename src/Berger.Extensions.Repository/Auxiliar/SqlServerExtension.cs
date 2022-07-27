@@ -14,7 +14,7 @@ namespace Berger.Extensions.Repository.Auxiliar
 
             AddDbContext<T>(services, configuration, name);
         }
-        private static void AddDbContext<T>(IServiceCollection services, IConfiguration configuration, string name) where T : DbContext
+        private static void AddDbContext<T>(IServiceCollection services, IConfiguration configuration, string name, bool tracking = true) where T : DbContext
         {
             var connection = configuration.GetConnectionString(name);
 
@@ -24,7 +24,9 @@ namespace Berger.Extensions.Repository.Auxiliar
             services.AddDbContext<T>(options =>
             {
                 options.UseSqlServer(connection);
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+                if (tracking == false)
+                    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
         }
     }

@@ -10,6 +10,7 @@ namespace Berger.Extensions.Repository.Interfaces
         IQueryable<T> Get();
         IQueryable<T> IgnoreQueryFilters();
         IQueryable<T> Get(Expression<Func<T, bool>> predicate);
+        T FirstOrDefault(Expression<Func<T, bool>> predicate);
         T GetByID(Guid id);
         T Add(T element, bool detach = false);
         void Add(IQueryable<T> elements, bool detach = false);

@@ -24,6 +24,16 @@ namespace Berger.Extensions.Repository.Services
         #endregion
 
         #region Methods
+        public virtual void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
+        public async virtual Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public IQueryable<T> Get()
         {
             return _dbSet;
@@ -47,7 +57,7 @@ namespace Berger.Extensions.Repository.Services
         public T Add(T element, bool detach = false)
         {
             _dbSet.Add(element);
-            _context.SaveChanges();
+            SaveChanges();
 
             if (detach)
                 _context.Detach(element);
@@ -59,7 +69,7 @@ namespace Berger.Extensions.Repository.Services
             foreach (var entity in elements)
                 _dbSet.Add(entity);
 
-            _context.SaveChanges();
+            SaveChanges();
 
             if (detach)
                 _context.Detach(elements);
@@ -67,26 +77,26 @@ namespace Berger.Extensions.Repository.Services
         public void Update(T element)
         {
             _context.Entry(element).State = EntityState.Modified;
-            _context.SaveChanges();
+            SaveChanges();
         }
         public void Delete(Guid id)
         {
             var element = GetByID(id);
 
             _context.SoftDelete(element);
-            _context.SaveChanges();
+            SaveChanges();
         }
         public void Delete(IQueryable<T> elements)
         {
             foreach (var element in elements)
                 _context.SoftDelete<T>(element);
 
-            _context.SaveChanges();
+            SaveChanges();
         }
         public async Task<T> AddAsync(T element)
         {
             await _dbSet.AddAsync(element);
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
 
             return element;
         }
@@ -94,7 +104,7 @@ namespace Berger.Extensions.Repository.Services
         {
             _dbSet.Update(element);
 
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
         }
         public async Task DeleteAsync(Guid id)
         {
@@ -102,7 +112,7 @@ namespace Berger.Extensions.Repository.Services
 
             _context.SoftDelete(element);
 
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
         }
         public void Dispose()
         {

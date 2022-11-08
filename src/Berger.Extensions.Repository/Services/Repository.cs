@@ -28,12 +28,10 @@ namespace Berger.Extensions.Repository.Services
         {
             _context.SaveChanges();
         }
-
         public async virtual Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }
-
         public IQueryable<T> Get()
         {
             return _dbSet;

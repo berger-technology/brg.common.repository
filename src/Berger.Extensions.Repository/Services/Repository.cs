@@ -1,44 +1,39 @@
-﻿using Berger.Extensions.Repository.Interfaces;
-using Berger.Extensions.Repository.Auxiliar;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System;
 using System.Linq;
-using System;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
+using Berger.Extensions.Repository.Auxiliar;
+using Berger.Extensions.Repository.Interfaces;
 
 namespace Berger.Extensions.Repository.Services
 {
     public abstract class Repository<T> : IDisposable, IRepository<T> where T : class
     {
         #region Properties
+        private readonly DbSet<T> _entity;
+
         private readonly DbContext _context;
-        private readonly DbSet<T> _dbSet;
         #endregion
 
         #region Constructors
         protected Repository(DbContext context)
         {
+            _entity = context.Set<T>();
+
             _context = context;
-            _dbSet = context.Set<T>();
         }
         #endregion
 
         #region Methods
-        public virtual void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-        public async virtual Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-        public IQueryable<T> Get()
-        {
-            return _dbSet;
-        }
         public IQueryable<T> IgnoreQueryFilters()
         {
-            return _dbSet.IgnoreQueryFilters();
+            return _entity.IgnoreQueryFilters();
+        }
+
+        public IQueryable<T> Get()
+        {
+            return _entity;
         }
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
         {
@@ -50,12 +45,13 @@ namespace Berger.Extensions.Repository.Services
         }
         public T GetByID(Guid id)
         {
-            return _dbSet.Find(id);
+            return _entity.Find(id);
         }
         public T Add(T element, bool detach = false)
         {
-            _dbSet.Add(element);
-            SaveChanges();
+            _entity.Add(element);
+
+            _context.SaveChanges();
 
             if (detach)
                 _context.Detach(element);
@@ -64,45 +60,56 @@ namespace Berger.Extensions.Repository.Services
         }
         public void Add(IQueryable<T> elements, bool detach = false)
         {
-            foreach (var entity in elements)
-                _dbSet.Add(entity);
+            foreach (var element in elements)
+                _entity.Add(element);
 
-            SaveChanges();
+            _context.SaveChanges();
 
             if (detach)
                 _context.Detach(elements);
         }
-        public void Update(T element)
+        public T Update(T element)
         {
             _context.Entry(element).State = EntityState.Modified;
-            SaveChanges();
+
+            _context.SaveChanges();
+
+            return element;
         }
         public void Delete(Guid id)
         {
             var element = GetByID(id);
 
             _context.SoftDelete(element);
-            SaveChanges();
+
+            _context.SaveChanges();
         }
         public void Delete(IQueryable<T> elements)
         {
             foreach (var element in elements)
                 _context.SoftDelete<T>(element);
 
-            SaveChanges();
+            _context.SaveChanges();
         }
         public async Task<T> AddAsync(T element)
         {
-            await _dbSet.AddAsync(element);
-            await SaveChangesAsync();
+            await _entity.AddAsync(element);
+
+            await _context.SaveChangesAsync();
 
             return element;
         }
-        public async Task UpdateAsync(T element)
+        public async Task<T> UpdateAsync(T element)
         {
-            _dbSet.Update(element);
+            _entity.Update(element);
 
-            await SaveChangesAsync();
+            await _context.SaveChangesAsync();
+
+            return element;
+        }
+        public async Task UpdateAsync(Func<T, string> field, string value)
+        {
+            await _entity.ExecuteUpdateAsync(s => s.SetProperty(field, field + value));
         }
         public async Task DeleteAsync(Guid id)
         {
@@ -110,8 +117,9 @@ namespace Berger.Extensions.Repository.Services
 
             _context.SoftDelete(element);
 
-            await SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
+
         public void Dispose()
         {
             _context.Dispose();

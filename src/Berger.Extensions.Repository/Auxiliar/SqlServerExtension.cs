@@ -19,7 +19,7 @@ namespace Berger.Extensions.Repository.Auxiliar
             var connection = configuration.GetConnectionString(name);
 
             if (string.IsNullOrEmpty(connection))
-                throw new FileNotFoundException($"The configuration file for the connection {name} was not found.");
+                throw new FileNotFoundException($"The application configuration file for the connection {name} was not found.");
 
             services.AddDbContext<T>(options =>
             {

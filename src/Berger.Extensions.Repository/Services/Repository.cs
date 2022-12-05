@@ -12,7 +12,6 @@ namespace Berger.Extensions.Repository.Services
     {
         #region Properties
         private readonly DbSet<T> _entity;
-
         private readonly DbContext _context;
         #endregion
 
@@ -51,7 +50,7 @@ namespace Berger.Extensions.Repository.Services
         {
             _entity.Add(element);
 
-            _context.SaveChanges();
+            this.SaveChanges();
 
             if (detach)
                 _context.Detach(element);
@@ -63,7 +62,7 @@ namespace Berger.Extensions.Repository.Services
             foreach (var element in elements)
                 _entity.Add(element);
 
-            _context.SaveChanges();
+            this.SaveChanges();
 
             if (detach)
                 _context.Detach(elements);
@@ -72,7 +71,7 @@ namespace Berger.Extensions.Repository.Services
         {
             _context.Entry(element).State = EntityState.Modified;
 
-            _context.SaveChanges();
+            this.SaveChanges();
 
             return element;
         }
@@ -82,20 +81,20 @@ namespace Berger.Extensions.Repository.Services
 
             _context.SoftDelete(element);
 
-            _context.SaveChanges();
+            this.SaveChanges();
         }
         public void Delete(IQueryable<T> elements)
         {
             foreach (var element in elements)
                 _context.SoftDelete<T>(element);
 
-            _context.SaveChanges();
+            this.SaveChanges();
         }
         public async Task<T> AddAsync(T element)
         {
             await _entity.AddAsync(element);
 
-            await _context.SaveChangesAsync();
+            await this.SaveChangesAsync();
 
             return element;
         }
@@ -103,7 +102,7 @@ namespace Berger.Extensions.Repository.Services
         {
             _entity.Update(element);
 
-            await _context.SaveChangesAsync();
+            await this.SaveChangesAsync();
 
             return element;
         }
@@ -117,9 +116,16 @@ namespace Berger.Extensions.Repository.Services
 
             _context.SoftDelete(element);
 
+            await this.SaveChangesAsync();
+        }
+        public virtual void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+        public async virtual Task SaveChangesAsync()
+        {
             await _context.SaveChangesAsync();
         }
-
         public void Dispose()
         {
             _context.Dispose();

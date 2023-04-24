@@ -3,10 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Berger.Extensions.Repository.Auxiliar;
-using Berger.Extensions.Repository.Interfaces;
 
-namespace Berger.Extensions.Repository.Services
+namespace Berger.Extensions.Repository
 {
     public abstract class Repository<T> : IDisposable, IRepository<T> where T : class
     {
@@ -29,7 +27,6 @@ namespace Berger.Extensions.Repository.Services
         {
             return _entity.IgnoreQueryFilters();
         }
-
         public IQueryable<T> Get()
         {
             return _entity;

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Berger.Extensions.Repository.Auxiliar
+namespace Berger.Extensions.Repository
 {
     public static class SqlServerExtension
     {

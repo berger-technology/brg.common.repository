@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Berger.Extensions.Repository.Auxiliar
+namespace Berger.Extensions.Repository
 {
     public static class RepositoryExtension
     {
@@ -14,7 +14,6 @@ namespace Berger.Extensions.Repository.Auxiliar
         {
             context.Entry(element).State = EntityState.Detached;
         }
-
         public static void Detach<T>(this DbContext context, IQueryable<T> elements)
         {
             foreach (var element in elements)

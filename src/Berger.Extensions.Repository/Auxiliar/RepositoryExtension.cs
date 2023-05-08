@@ -17,9 +17,7 @@ namespace Berger.Extensions.Repository
         public static void Detach<T>(this DbContext context, IQueryable<T> elements)
         {
             foreach (var element in elements)
-            {
                 context.Entry(element).State = EntityState.Detached;
-            }
         }
     }
 }

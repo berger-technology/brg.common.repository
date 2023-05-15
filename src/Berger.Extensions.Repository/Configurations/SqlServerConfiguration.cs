@@ -3,19 +3,16 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Berger.Extensions.Repository
 {
     public static class SqlServerConfiguration
     {
-        public static IServiceCollection ConfigureDbContext<T>(this IServiceCollection services, IConfiguration configuration, string name) where T : DbContext
+        public static IServiceCollection ConfigureDbContext<T>(this IServiceCollection services, IConfiguration configuration, string name, bool tracking = true) where T : DbContext
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            return Configure<T>(services, configuration, name);
-        }
-        private static IServiceCollection Configure<T>(IServiceCollection services, IConfiguration configuration, string name, bool tracking = true) where T : DbContext
-        {
             var connection = configuration.GetConnectionString(name);
 
             if (string.IsNullOrEmpty(connection))
@@ -30,6 +27,22 @@ namespace Berger.Extensions.Repository
             });
 
             return services;
+        }
+        public static void ConfigureDbContextFactory<T>(this IServiceCollection services, IConfiguration configuration, ServiceLifetime lifetime = ServiceLifetime.Scoped) where T : DbContext
+        {
+            services.AddDbContextFactory<T>(delegate (DbContextOptionsBuilder options)
+            {
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+                options.ConfigureWarnings(builder =>
+                {
+                    builder.Ignore(RelationalEventId.BoolWithDefaultWarning);
+                    builder.Ignore(CoreEventId.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning);
+                });
+
+            },
+                lifetime
+            );
         }
     }
 }

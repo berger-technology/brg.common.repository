@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Berger.Extensions.Repository
 {
-    public static class RepositoryExtension
+    public static class RepositoryHelper
     {
         public static void SoftDelete<T>(this DbContext context, T entity) where T : class
         {

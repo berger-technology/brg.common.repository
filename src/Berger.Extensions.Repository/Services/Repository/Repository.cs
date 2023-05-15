@@ -23,23 +23,23 @@ namespace Berger.Extensions.Repository
         #endregion
 
         #region Methods
-        public IQueryable<T> IgnoreQueryFilters()
+        public IQueryable<T> GetIgnoreFilters()
         {
-            return _entity.IgnoreQueryFilters();
+            return Get().IgnoreQueryFilters();
         }
         public IQueryable<T> Get()
         {
             return _entity;
         }
-        public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> Get(Expression<Func<T, bool>> expression)
         {
-            return Get().Where(predicate);
+            return Get().Where(expression);
         }
-        public T FirstOrDefault(Expression<Func<T, bool>> predicate)
+        public T FirstOrDefault(Expression<Func<T, bool>> expression)
         {
-            return Get().Where(predicate).FirstOrDefault();
+            return Get().Where(expression).FirstOrDefault();
         }
-        public T GetByID(Guid id)
+        public T GetById(Guid id)
         {
             return _entity.Find(id);
         }
@@ -74,7 +74,7 @@ namespace Berger.Extensions.Repository
         }
         public void Delete(Guid id)
         {
-            var element = GetByID(id);
+            var element = GetById(id);
 
             _context.SoftDelete(element);
 
@@ -109,7 +109,7 @@ namespace Berger.Extensions.Repository
         }
         public async Task DeleteAsync(Guid id)
         {
-            var element = GetByID(id);
+            var element = GetById(id);
 
             _context.SoftDelete(element);
 

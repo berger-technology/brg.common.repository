@@ -7,10 +7,10 @@ namespace Berger.Extensions.Repository
 {
     public interface IRepository<T>
     {
-        IQueryable<T> IgnoreQueryFilters();
+        IQueryable<T> GetIgnoreFilters();
         IQueryable<T> Get();
         IQueryable<T> Get(Expression<Func<T, bool>> predicate);
-        T GetByID(Guid id);
+        T GetById(Guid id);
         T FirstOrDefault(Expression<Func<T, bool>> predicate);
         T Add(T element, bool detach = false);
         void Add(IQueryable<T> elements, bool detach = false);

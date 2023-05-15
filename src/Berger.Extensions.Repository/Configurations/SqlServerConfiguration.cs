@@ -23,7 +23,7 @@ namespace Berger.Extensions.Repository
 
             services.AddDbContext<T>(options =>
             {
-                options.UseSqlServer(connection);
+                options.UseSqlServer(connection, e => e.EnableRetryOnFailure());
 
                 if (tracking == false)
                     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);

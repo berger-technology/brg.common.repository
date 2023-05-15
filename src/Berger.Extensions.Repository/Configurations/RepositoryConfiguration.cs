@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Berger.Extensions.Repository
 {
-    public static class ContextConfiguration
+    public static class RepositoryConfiguration
     {
         public static void ConfigureDatabase<T>(this IServiceCollection services, IConfiguration configuration) where T : DbContext
         {

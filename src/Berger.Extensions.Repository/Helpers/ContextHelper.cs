@@ -30,9 +30,6 @@ namespace Berger.Extensions.Repository
             // Database Configuration
             services.ConfigureDbContext<T>(builder, "AzureSqlServer");
 
-            // Repository Configuration
-            services.ConfigureRepository();
-
             // Service Building
             return services.BuildServiceProvider();
         }

@@ -13,7 +13,6 @@ namespace Berger.Extensions.Repository
         }
         public static void Reset<T>(this IServiceProvider provider) where T : DbContext
         {
-            // Context
             var _context = GetContext<T>(provider);
 
             _context.Database.EnsureDeleted();

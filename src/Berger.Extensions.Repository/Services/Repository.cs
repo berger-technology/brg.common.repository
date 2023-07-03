@@ -23,10 +23,6 @@ namespace Berger.Extensions.Repository
         #endregion
 
         #region Methods
-        public IQueryable<T> GetIgnoreFilters()
-        {
-            return Get().IgnoreQueryFilters();
-        }
         public IQueryable<T> Get()
         {
             return _entity;
@@ -34,6 +30,10 @@ namespace Berger.Extensions.Repository
         public IQueryable<T> Get(Expression<Func<T, bool>> expression)
         {
             return Get().Where(expression);
+        }
+        public IQueryable<T> GetIgnoreFilters()
+        {
+            return Get().IgnoreQueryFilters();
         }
         public T FirstOrDefault(Expression<Func<T, bool>> expression)
         {

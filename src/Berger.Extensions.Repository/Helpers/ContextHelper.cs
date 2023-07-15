@@ -18,7 +18,7 @@ namespace Berger.Extensions.Repository
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
         }
-        public static ServiceProvider CreateContext<T>(this IConfiguration builder) where T : DbContext
+        public static ServiceProvider CreateContext<T>(this IConfiguration builder, string name = "AzureSqlServer") where T : DbContext
         {
             // Service Configuration
             var services = new ServiceCollection();
@@ -27,7 +27,7 @@ namespace Berger.Extensions.Repository
             services.AddSingleton<IConfiguration>(builder);
 
             // Database Configuration
-            services.ConfigureDbContext<T>(builder, "AzureSqlServer");
+            services.ConfigureDbContext<T>(builder, name);
 
             // Service Building
             return services.BuildServiceProvider();

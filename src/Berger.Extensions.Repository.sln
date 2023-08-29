@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Berger.Extensions.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Berger.Extensions.Repository.Tests", "Berger.Extensions.Repository.Tests\Berger.Extensions.Repository.Tests.csproj", "{9E72689F-8E57-4C1E-B21E-1CF4B1206AA1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{C0C21867-0B05-4D99-9956-D78F03ED3B66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{25B7C378-2077-47E9-BD30-01503579FAB8}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\Berger.Extensions.Repository.yml = ..\build\Berger.Extensions.Repository.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +31,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{186FF5E2-7908-4870-A936-ECE0D594B5F8} = {C0C21867-0B05-4D99-9956-D78F03ED3B66}
+		{9E72689F-8E57-4C1E-B21E-1CF4B1206AA1} = {C0C21867-0B05-4D99-9956-D78F03ED3B66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13FADEAC-8483-431A-922F-D54D13E24574}

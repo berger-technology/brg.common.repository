@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 namespace Berger.Extensions.Repository
@@ -14,7 +13,7 @@ namespace Berger.Extensions.Repository
         }
         public static void SeedFromLargeFile(this DbContext context, string path, int bufferSize)
         {
-            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize, FileOptions.SequentialScan);
+            var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize, FileOptions.SequentialScan);
 
             using (StreamReader reader = new StreamReader(fs))
             {

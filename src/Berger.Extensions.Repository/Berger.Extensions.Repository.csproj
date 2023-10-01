@@ -1,19 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<Product>Berger.Extensions.Repository</Product>
-		<Company>Berger Information Technology</Company>
-		<Authors>Berger Information Technology</Authors>
-		<PackageId>Berger.Extensions.Repository</PackageId>
-		<AssemblyName>Berger.Extensions.Repository</AssemblyName>
-		<RootNamespace>Berger.Extensions.Repository</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 </Project>

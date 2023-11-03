@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Berger.Extensions.Abstractions;
 
 namespace Berger.Extensions.Repository
 {

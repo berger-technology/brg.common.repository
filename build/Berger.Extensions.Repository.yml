@@ -35,7 +35,7 @@ jobs:
     displayName: 'dotnet build'
     inputs:
       projects: '**/*.csproj'
-      arguments: '--configuration $(buildConfiguration)'
+      arguments: '--configuration Release'
 
   - task: DotNetCoreCLI@2
     displayName: dotnet pack

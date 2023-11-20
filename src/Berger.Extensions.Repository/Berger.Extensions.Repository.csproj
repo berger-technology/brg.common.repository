@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Nullable>enable</Nullable>
+		<Nullable>disable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>

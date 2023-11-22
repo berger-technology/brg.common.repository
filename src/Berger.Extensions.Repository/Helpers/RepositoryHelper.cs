@@ -6,8 +6,8 @@ namespace Berger.Extensions.Repository
     {
         public static void SoftDelete<T>(this DbContext context, T entity) where T : class
         {
-            context.Entry(entity).CurrentValues[Constants.Deleted] = true;
-            context.Entry(entity).Property(Constants.Deleted).IsModified = true;
+            context.Entry(entity).CurrentValues[Values.Deleted] = true;
+            context.Entry(entity).Property(Values.Deleted).IsModified = true;
         }
         public static void Detach<T>(this DbContext context, T element)
         {

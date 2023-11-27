@@ -4,7 +4,7 @@ using Berger.Extensions.Abstractions;
 
 namespace Berger.Extensions.Repository
 {
-    public abstract class Repository<T> : IDisposable, IRepository<T> where T : class
+    public abstract class Repository<T> : IRepository<T>, IDisposable where T : class
     {
         #region Properties
         private readonly DbSet<T> _entity;

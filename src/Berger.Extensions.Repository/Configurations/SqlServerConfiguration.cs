@@ -31,6 +31,8 @@ namespace Berger.Extensions.Repository
         {
             services.AddDbContextFactory<T>(delegate (DbContextOptionsBuilder options)
             {
+                options.EnableSensitiveDataLogging();
+
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
                 options.ConfigureWarnings(builder =>

@@ -6,7 +6,7 @@ namespace Berger.Extensions.Repository
     {
         public BaseContext(DbContextOptions<T> options) : base(options)
         {
-            Database.SetCommandTimeout(10);
+            Database.SetCommandTimeout(1000);
         }
         protected override void ConfigureConventions(ModelConfigurationBuilder builder)
         {

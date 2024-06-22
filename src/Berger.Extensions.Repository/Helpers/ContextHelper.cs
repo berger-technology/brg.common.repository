@@ -8,7 +8,7 @@ namespace Berger.Extensions.Repository
     {
         public static T GetContext<T>(this IServiceProvider provider) where T : DbContext
         {
-            return provider.GetService<T>();
+            return provider.GetContext<T>();
         }
         public static void Reset<T>(this IServiceProvider provider) where T : DbContext
         {

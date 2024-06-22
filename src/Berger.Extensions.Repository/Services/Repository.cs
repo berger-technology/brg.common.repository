@@ -4,7 +4,7 @@ using Berger.Extensions.Abstractions;
 
 namespace Berger.Extensions.Repository
 {
-    public abstract class Repository<T> : IDisposable, IRepository<T> where T : class
+    public abstract class Repository<T> : IRepository<T>, IDisposable where T : class
     {
         #region Properties
         private readonly DbSet<T> _entity;
@@ -21,9 +21,9 @@ namespace Berger.Extensions.Repository
         #endregion
 
         #region Methods
-        public IQueryable<T> Get()
+        public IQueryable<T> Get(bool tracking = false)
         {
-            return _entity;
+            return tracking ? _entity : _entity.AsNoTracking();
         }
         public IQueryable<T> Get(Expression<Func<T, bool>> expression)
         {
@@ -103,7 +103,7 @@ namespace Berger.Extensions.Repository
         }
         public async Task UpdateAsync(Func<T, string> field, string value)
         {
-            await _entity.ExecuteUpdateAsync(s => s.SetProperty(field, field + value));
+            await _entity.ExecuteUpdateAsync(e => e.SetProperty(field, field + value));
         }
         public async Task DeleteAsync(Guid id)
         {

@@ -5,11 +5,22 @@ namespace Berger.Extensions.Repository
 {
     public static class SeedHelper
     {
-        public static void SeedFromFile(this DbContext context, string path)
+        public static void ExecuteSqlRaw(this DbContext context, string path)
         {
             var script = File.ReadAllText(path, Encoding.UTF8);
 
             context.Database.ExecuteSqlRaw(script);
+        }
+        public static void ExecuteSqlRawBatch(this DbContext context, string path)
+        {
+            var script = File.ReadAllText(path, Encoding.UTF8);
+
+            var sqlBatches = script.Split(new[] { "GO" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var batch in sqlBatches)
+            {
+                context.Database.ExecuteSqlRaw(script);
+            }            
         }
         public static void SeedFromLargeFile(this DbContext context, string path, int bufferSize)
         {

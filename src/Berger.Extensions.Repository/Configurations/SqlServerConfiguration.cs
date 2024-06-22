@@ -9,7 +9,8 @@ namespace Berger.Extensions.Repository
     {
         public static IServiceCollection ConfigureDbContext<T>(this IServiceCollection services, IConfiguration configuration, string name, bool tracking = true) where T : DbContext
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (services is null)
+                throw new ArgumentNullException(nameof(services));
 
             var connection = configuration.GetConnectionString(name);
 
@@ -30,6 +31,8 @@ namespace Berger.Extensions.Repository
         {
             services.AddDbContextFactory<T>(delegate (DbContextOptionsBuilder options)
             {
+                options.EnableSensitiveDataLogging();
+
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
                 options.ConfigureWarnings(builder =>

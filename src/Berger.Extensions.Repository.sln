@@ -7,12 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{C0C218
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{25B7C378-2077-47E9-BD30-01503579FAB8}"
 	ProjectSection(SolutionItems) = preProject
-		..\build\Berger.Extensions.Repository.Old.yml = ..\build\Berger.Extensions.Repository.Old.yml
+		..\build\Berger.Extensions.Repository.yml = ..\build\Berger.Extensions.Repository.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Berger.Extensions.Abstractions", "..\..\Berger.Extensions.Abstractions\src\Berger.Extensions.Abstractions\Berger.Extensions.Abstractions.csproj", "{4A729619-6FC1-4A63-B95F-4DFEA8EDAE7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Berger.Extensions.Repository", "Berger.Extensions.Repository\Berger.Extensions.Repository.csproj", "{BF0A6347-6090-4FB2-8246-01CCF89EEC7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Berger.Extensions.Repository", "Berger.Extensions.Repository\Berger.Extensions.Repository.csproj", "{BF0A6347-6090-4FB2-8246-01CCF89EEC7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

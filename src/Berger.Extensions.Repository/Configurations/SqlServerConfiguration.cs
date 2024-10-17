@@ -21,13 +21,14 @@ namespace Berger.Extensions.Repository
             {
                 options.UseSqlServer(connection, e => e.EnableRetryOnFailure());
 
-                if (tracking == false)
+                if (!tracking)
                     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            });
+            },
+            ServiceLifetime.Transient);
 
             return services;
         }
-        public static void ConfigureDbContextFactory<T>(this IServiceCollection services, IConfiguration configuration, ServiceLifetime lifetime = ServiceLifetime.Scoped) where T : DbContext
+        public static void ConfigureDbContextFactory<T>(this IServiceCollection services, IConfiguration configuration, ServiceLifetime lifetime = ServiceLifetime.Transient) where T : DbContext
         {
             services.AddDbContextFactory<T>(delegate (DbContextOptionsBuilder options)
             {

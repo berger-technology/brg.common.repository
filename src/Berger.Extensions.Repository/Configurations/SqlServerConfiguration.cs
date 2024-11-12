@@ -1,10 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Berger.Extensions.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Berger.Extensions.Repository
 {
+    public class ApplicationContext : IContext
+    {
+        private Guid _applicationId;
+        public Guid ApplicationId => _applicationId;
+
+        public ApplicationContext()
+        {
+            _applicationId = Guid.Empty;
+        }
+
+        public void SetContext(Guid applicationId)
+        {
+            _applicationId = applicationId;
+        }
+        public void SetApplication(Guid applicationId)
+        {
+            _applicationId = applicationId;
+        }
+    }
     public static class SqlServerConfiguration
     {
         public static IServiceCollection ConfigureDbContext<T>(this IServiceCollection services, IConfiguration configuration, string name, bool tracking = true) where T : DbContext
@@ -17,7 +37,7 @@ namespace Berger.Extensions.Repository
             if (string.IsNullOrEmpty(connection))
                 throw new FileNotFoundException(Errors.ConfigNotFound);
 
-            services.AddDbContext<T>(options =>
+            services.AddScoped<IContext, ApplicationContext>().AddDbContext<T>(options =>
             {
                 options.UseSqlServer(connection, e => e.EnableRetryOnFailure());
 

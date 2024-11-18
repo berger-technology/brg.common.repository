@@ -14,6 +14,7 @@
 
 	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<ProjectReference Include="$(berger-open-source)\Berger.Extensions.Abstractions\src\Berger.Extensions.Abstractions\Berger.Extensions.Abstractions.csproj" />
+		<ProjectReference Include="$(berger-open-source)\Berger.Extensions.Configuration\src\Berger.Extensions.Configuration\Berger.Extensions.Configuration.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

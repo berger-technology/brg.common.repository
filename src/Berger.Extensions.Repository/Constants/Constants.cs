@@ -8,8 +8,8 @@
     {
         public const string ConfigNotFound = $"The application configuration file for the connection was not found.";
     }
-    public static class ConnectionStrings
+    public static class Patterns
     {
-        public const string AzureSqlServer = "AzureSqlServer";
+        public const string AzureSqlServer = "Connections:Databases:AzureSqlServer";
     }
 }

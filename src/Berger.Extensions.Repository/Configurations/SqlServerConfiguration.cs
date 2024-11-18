@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Berger.Extensions.Abstractions;
+using Berger.Extensions.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -27,12 +28,13 @@ namespace Berger.Extensions.Repository
     }
     public static class SqlServerConfiguration
     {
-        public static IServiceCollection ConfigureDbContext<T>(this IServiceCollection services, IConfiguration configuration, string name, bool tracking = true) where T : DbContext
+        public static IServiceCollection ConfigureDbContext<T>(this IServiceCollection services, IConfiguration configuration, string pattern, bool tracking = true) where T : DbContext
         {
             if (services is null)
                 throw new ArgumentNullException(nameof(services));
 
-            var connection = configuration.GetConnectionString(name);
+            //var connection = configuration.GetConnectionString(pattern);
+            var connection = configuration.GetConnection(pattern);
 
             if (string.IsNullOrEmpty(connection))
                 throw new FileNotFoundException(Errors.ConfigNotFound);

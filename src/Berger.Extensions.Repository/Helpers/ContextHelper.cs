@@ -14,10 +14,10 @@ namespace Berger.Extensions.Repository
         {
             var _context = GetContext<T>(provider);
 
-            _context.Database.EnsureDeleted();
+            //_context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
         }
-        public static ServiceProvider CreateContext<T>(this IConfiguration builder, string name = ConnectionStrings.AzureSqlServer) where T : DbContext
+        public static ServiceProvider CreateContext<T>(this IConfiguration builder, string pattern = Patterns.AzureSqlServer) where T : DbContext
         {
             // Service Configuration
             var services = new ServiceCollection();
@@ -26,7 +26,7 @@ namespace Berger.Extensions.Repository
             services.AddSingleton<IConfiguration>(builder);
 
             // Database Configuration
-            services.ConfigureDbContext<T>(builder, name);
+            services.ConfigureDbContext<T>(builder, pattern);
 
             // Service Building
             return services.BuildServiceProvider();

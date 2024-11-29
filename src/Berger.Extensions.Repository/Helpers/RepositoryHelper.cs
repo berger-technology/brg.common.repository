@@ -9,14 +9,14 @@ namespace Berger.Extensions.Repository
             context.Entry(entity).CurrentValues[Values.Deleted] = true;
             context.Entry(entity).Property(Values.Deleted).IsModified = true;
         }
-        public static void Detach<T>(this DbContext context, T element)
+        public static void Detach<T>(this DbContext context, T entity)
         {
-            context.Entry(element).State = EntityState.Detached;
+            context.Entry(entity).State = EntityState.Detached;
         }
-        public static void Detach<T>(this DbContext context, IQueryable<T> elements)
+        public static void Detach<T>(this DbContext context, IQueryable<T> entities)
         {
-            foreach (var element in elements)
-                context.Entry(element).State = EntityState.Detached;
+            foreach (var entity in entities)
+                context.Entry(entity).State = EntityState.Detached;
         }
     }
 }

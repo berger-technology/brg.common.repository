@@ -10,6 +10,6 @@
     }
     public static class Patterns
     {
-        public const string AzureSqlServer = "Connections:Databases:AzureSqlServer";
+        public const string AzureSqlServer = "ConnectionStrings:AzureSqlServer";
     }
 }
